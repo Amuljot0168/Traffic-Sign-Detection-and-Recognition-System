@@ -1,0 +1,12 @@
+/build/
+.vscode/
+
+CMakeCache.txt
+CMakeFiles/
+Makefile
+
+data/
+models/
+
+*.exe
+*.env
