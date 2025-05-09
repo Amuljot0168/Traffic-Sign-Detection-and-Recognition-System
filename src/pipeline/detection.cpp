@@ -1,8 +1,10 @@
-#include "include/detection.h"
-#include "include/yolo_utils.h"
+#include "detection.h"
 #include <opencv2/opencv.hpp>
 
-cv::dnn::Net loadYoloModel(const std::string& model_path) {
+const float CONF_THRESHOLD = 0.25;
+const float NMS_THRESHOLD = 0.45;
+
+cv::dnn::Net load_yolo_model(const std::string& model_path) {
     cv::dnn::Net yolo_net = cv::dnn::readNetFromONNX(model_path);
 
     std::cout << "Model loaded successfully from: " << model_path << std::endl;
@@ -15,7 +17,21 @@ cv::dnn::Net loadYoloModel(const std::string& model_path) {
     return yolo_net;
 }
 
-std::vector<Detection> post_process(const cv::Mat& output, const cv::Size& image_size) {
+std::vector<cv::Mat> run_yolo(const cv::Mat& frame, cv::dnn::Net& yolo_net) {
+    const int input_width = 415;
+    const int input_height = 415;
+
+    cv::Mat blob;
+    cv::dnn::blobFromImage(frame, blob, 1.0/255.0, cv::Size(input_width, input_height), cv::Scalar(), true, false);
+    yolo_net.setInput(blob);
+
+    std::vector<cv::Mat> outputs;
+    yolo_net.forward(outputs, yolo_net.getUnconnectedOutLayersNames());
+
+    return outputs;
+}
+
+std::vector<Detection> post_process_yolo(const cv::Mat& output, const cv::Size& image_size) {
     std::vector<Detection> detections;
     std::cout << "Output shape: " << output.size << std::endl;
     int rows = output.size[1];
@@ -78,31 +94,25 @@ std::vector<Detection> post_process(const cv::Mat& output, const cv::Size& image
     return final_detections;
 }
 
-void draw_detections(const cv::Mat& image, const std::vector<Detection>& detections, float CONF_THRESHOLD) {
-    for (const auto& det : detections) {
-        if (det.confidence < CONF_THRESHOLD) {
-            continue;
-        }
+std::vector<cv::Mat> crop_detection_roi(const cv::Mat& frame, const std::vector<Detection>& detections, const cv::Size& targetSize) {
+    std::vector<cv::Mat> cropped_rois;
 
-        cv::Rect box = det.box & cv::Rect(0, 0, image.cols, image.rows);
-        if (box.width <= 0 || box.height <= 0) {
-            std::cerr << "Warning: Invalid box dimensions: " << box << std::endl;
-            continue;
-        }
+    for(auto& det : detections) {
+        cv::Rect box = det.box & cv::Rect(0, 0, frame.cols, frame.rows);
+        if (box.width <= 0 || box.height <= 0) continue;
 
-        rectangle(image, box, cv::Scalar(0, 255, 0), 2);
+        cv::Mat roi = frame(box);
 
-        std::string label = "ID:" + std::to_string(det.class_id) + " (" + cv::format("%.2f", det.confidence) + ")";
-        int baseLine = 0;
-        cv::Size labelSize = cv::getTextSize(label, cv::FONT_HERSHEY_SIMPLEX, 0.5, 1, &baseLine);
+        int maxDim = std::max(roi.cols, roi.rows);
+        cv::Mat square = cv::Mat::zeros(maxDim, maxDim, roi.type());
+        roi.copyTo(square(cv::Rect((maxDim - roi.cols) / 2, (maxDim - roi.rows) / 2, roi.cols, roi.rows)));
 
-        int top = std::max(box.y - labelSize.height - baseLine, 0);
-        int left = std::max(box.x, 0);
-        cv::rectangle(image, cv::Point(left, top),
-                      cv::Point(left + labelSize.width, top + labelSize.height + baseLine),
-                      cv::Scalar(0, 255, 0), cv::FILLED);
+        cv::Mat resized;
+        cv::resize(square, resized, targetSize);
 
-        cv::putText(image, label, cv::Point(left, top + labelSize.height),
-                    cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0), 1);
+        cropped_rois.push_back(resized);
     }
+    
+    return cropped_rois;
 }
+

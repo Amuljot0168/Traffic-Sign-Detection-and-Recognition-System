@@ -13,19 +13,57 @@ message(STATUS "OpenCV_LIBS = ${OpenCV_LIBS}")
 include_directories(${OpenCV_INCLUDE_DIRS} include src/test)
 
 # add_executable(opencvtest src/main.cpp)
-add_executable(main src/main.cpp)
+
+# ====================================================
+#                   Main Pipeline
+# ====================================================
+add_executable(main src/main.cpp
+
+        # Detection
+            src/pipeline/detection.h 
+            src/pipeline/detection.cpp
+
+        # Recognition
+            src/pipeline/recognition.cpp
+            src/pipeline/recognition.h
+
+        # Runner
+            src/pipeline/runner.h
+            src/pipeline/runner.cpp
+
+        # Utils
+            src/utils/draw.h
+            src/utils/draw.cpp 
+            src/utils/convert_cnn_labels.h
+            src/utils/convert_cnn_labels.cpp
+
+        # Metrics
+            src/metrics/cnn_metrics.h
+            src/metrics/cnn_metrics.cpp
+            src/metrics/yolo_metrics.h
+            src/metrics/yolo_metrics.cpp
+            src/metrics/metrics.h
+            src/metrics/metrics.cpp
+)
 target_link_libraries(main ${OpenCV_LIBS})
 
-add_executable(yolo_test src/test/yolo_test/yolo_test.cpp 
-            src/test/yolo_test/include/yolo_utils.h
-            src/test/yolo_test/yolo_utils.cpp
-            src/test/yolo_test/include/yolo_video.h
-            src/test/yolo_test/yolo_video.cpp
-            src/test/yolo_test/include/detection.h
-            src/test/yolo_test/detection.cpp)
+
+
+# ====================================================
+#                YOLO Test Executable
+# ====================================================
+add_executable(yolo_test test/yolo_test/yolo_test.cpp 
+            test/yolo_test/yolo_utils.h
+            test/yolo_test/yolo_utils.cpp
+            test/yolo_test/detection.h
+            test/yolo_test/detection.cpp)
 target_link_libraries(yolo_test ${OpenCV_LIBS})
 
-add_executable(cnn_test src/test/cnn_test/cnn_test.cpp)
+# ====================================================
+#                 CNN Test Executable
+# ====================================================
+
+add_executable(cnn_test test/cnn_test/cnn_test.cpp)
 target_link_libraries(cnn_test ${OpenCV_LIBS})
 
 # target_link_libraries(opencvtest ${OpenCV_LIBS})
