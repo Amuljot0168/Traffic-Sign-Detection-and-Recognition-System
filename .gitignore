@@ -5,8 +5,7 @@ CMakeCache.txt
 CMakeFiles/
 Makefile
 
-data/
-models/
+test_data/
 test/
 src/config/config.h
 

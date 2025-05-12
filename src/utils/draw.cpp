@@ -16,7 +16,8 @@ void draw_detections(const cv::Mat& image, const std::vector<Detection>& detecti
 
         rectangle(image, box, cv::Scalar(0, 255, 0), 2);
 
-        std::string label = "ID:" + std::to_string(det.class_id) + " (" + cv::format("%.2f", det.confidence) + ")";
+        std::string label = "Conf (" + cv::format("%.2f", det.confidence) + ")";
+        // std::string label = "ID:" + std::to_string(det.class_id) + " (" + cv::format("%.2f", det.confidence) + ")";
         int baseLine = 0;
         cv::Size labelSize = cv::getTextSize(label, cv::FONT_HERSHEY_SIMPLEX, 0.5, 1, &baseLine);
 

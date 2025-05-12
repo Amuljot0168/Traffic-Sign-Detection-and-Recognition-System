@@ -19,16 +19,19 @@ void process_images() {
     auto yolo_outputs = run_yolo(image, yolo_net);
     auto detections = post_process_yolo(yolo_outputs[0], image.size());
     draw_detections(image, detections, CONF_THRESHOLD);
-    cv::imshow("Detection", image);
-    cv::waitKey(0);
+    // cv::imshow("Detection", image);
+    // cv::waitKey(0);
     std::vector<cv::Mat> cropped_rois = crop_detection_roi(image, detections);
     std::vector<int> cnn_raw_predictions;
     for(auto& crop : cropped_rois) {
         cv::Mat preprocessed_crop = preprocess_images_for_cnn(crop);
-        cv::Mat cnn_output = run_cnn(crop, cnn_net);
+        cv::Mat cnn_output = run_cnn(preprocessed_crop, cnn_net);
         cnn_raw_predictions.push_back(cnn_inference(cnn_output));
     }
     std::vector<std::string> cnn_predictions = get_cnn_labels_from_ids(cnn_raw_predictions);
     draw_detections_with_cnn_predictions(image, detections, cnn_predictions, CONF_THRESHOLD);
-    
+    cv::imshow("Prediction", image);
+    cv::waitKey(0); 
 }
+
+
