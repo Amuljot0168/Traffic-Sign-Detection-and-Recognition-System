@@ -13,7 +13,7 @@ A C++-based Traffic Sign Detection and Recognition (TSDR) system that leverages 
 
 ### Image Input
 
-![Image Demo](data\image\00524.jpg)
+![Image Demo](data/image/00524.jpg)
 
 ## Technologies Used
 
@@ -39,21 +39,29 @@ A C++-based Traffic Sign Detection and Recognition (TSDR) system that leverages 
    cd traffic-sign-detection
    ```
 
-2. Download the OpenCV from this
+2. Download the OpenCV from this link
 
-3. Generate build files using CMake
+[OpenCV-download-File Repository](https://github.com/Amul24/OpenCV-download-File.git)
+
+3. Set the environment variables like this
+
+```bash
+OpenCV-MinGW-Build-OpenCV-4.5.5-x64\x64\mingw\bin
+```
+
+4. Generate build files using CMake
 
 ```bash
 cmake -G "MinGW Makefiles" -S . -B build/
 ```
 
-4. Build the project
+5. Build the project
 
 ```bash
 cmake --build build/ --config Release
 ```
 
-5. Run the executable
+6. Run the executable
 
 ```bash
 cd build
