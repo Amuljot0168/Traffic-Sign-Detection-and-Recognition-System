@@ -14,6 +14,7 @@ A C++-based Traffic Sign Detection and Recognition (TSDR) system that leverages 
 ### Image Input
 
 ![Image Demo](data/image/001.jpg)
+![Image Demo](data/image/002.jpg)
 
 ## Technologies Used
 
@@ -61,7 +62,9 @@ cmake -G "MinGW Makefiles" -S . -B build/
 cmake --build build/ --config Release
 ```
 
-6. Run the executable
+6. Update the paths of model and images in config folder in config.h file
+
+7. Run the executable
 
 ```bash
 cd build
