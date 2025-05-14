@@ -13,7 +13,7 @@ A C++-based Traffic Sign Detection and Recognition (TSDR) system that leverages 
 
 ### Image Input
 
-![Image Demo](data/image/00524.jpg)
+![Image Demo](data/image/001.jpg)
 
 ## Technologies Used
 
