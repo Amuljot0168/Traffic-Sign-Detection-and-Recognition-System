@@ -1,9 +1,10 @@
+// detection.cpp
+// Contains logic for loading YOLO model, running YOLO, processing the results and cropping the detections for CNN input
 #include "detection.h"
+#include "../config/config.h"
 #include <opencv2/opencv.hpp>
 
-const float CONF_THRESHOLD = 0.25;
-const float NMS_THRESHOLD = 0.45;
-
+// Loads YOLO model
 cv::dnn::Net load_yolo_model(const std::string& model_path) {
     cv::dnn::Net yolo_net = cv::dnn::readNetFromONNX(model_path);
 
@@ -17,23 +18,29 @@ cv::dnn::Net load_yolo_model(const std::string& model_path) {
     return yolo_net;
 }
 
+// Runs YOLO Model and returns raw YOLO output
 std::vector<cv::Mat> run_yolo(const cv::Mat& frame, cv::dnn::Net& yolo_net) {
     const int input_width = 415;
     const int input_height = 415;
 
     cv::Mat blob;
     cv::dnn::blobFromImage(frame, blob, 1.0/255.0, cv::Size(input_width, input_height), cv::Scalar(), true, false);
-    yolo_net.setInput(blob);
 
+    auto start = std::chrono::high_resolution_clock::now();
+    yolo_net.setInput(blob);
+    
     std::vector<cv::Mat> outputs;
     yolo_net.forward(outputs, yolo_net.getUnconnectedOutLayersNames());
-
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    std::cout << "YOLO INFERENCE TIME: " << duration.count() << " MS" << std::endl;
     return outputs;
 }
 
+// 
 std::vector<Detection> post_process_yolo(const cv::Mat& output, const cv::Size& image_size) {
     std::vector<Detection> detections;
-    std::cout << "Output shape: " << output.size << std::endl;
+
     int rows = output.size[1];
     int dimensions = output.size[2];
     const float* data = (float*)output.data;

@@ -1,10 +1,6 @@
 #ifndef DETECTION_H
 #define DETECTION_H
-#include <opencv2/opencv.hpp>
-
-extern const float CONF_THRESHOLD;
-extern const float NMS_THRESHOLD;
-
+#include <opencv2/opencv.hpp> 
 struct Detection {
     int class_id;
     float confidence;

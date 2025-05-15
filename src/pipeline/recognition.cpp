@@ -1,3 +1,6 @@
+// recognition.cpp
+// Contains lofic for loading and running CNN model and processing output to get CNN prediction
+
 #include "recognition.h"
 #include <opencv2/opencv.hpp>
 
