@@ -35,10 +35,10 @@ A C++-based Traffic Sign Detection and Recognition (TSDR) system that leverages 
 
 1. **Clone the repository:**
 
-   ```bash
-   git clone https://github.com/yourusername/traffic-sign-detection.git
-   cd traffic-sign-detection
-   ```
+```bash
+git clone https://github.com/Amuljot0168/Traffic-Sign-Detection-and-Recognition-System.git
+cd Traffic-Sign-Detection-and-Recognition-System
+```
 
 2. Download the OpenCV from this link
 
