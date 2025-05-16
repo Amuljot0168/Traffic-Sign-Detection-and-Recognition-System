@@ -9,8 +9,8 @@ find_package(OpenCV REQUIRED)
 message(STATUS "OpenCV_INCLUDE_DIRS = ${OpenCV_INCLUDE_DIRS}")
 message(STATUS "OpenCV_LIBS = ${OpenCV_LIBS}")
 
-# include_directories(${OpenCV_INCLUDE_DIRS})
-include_directories(${OpenCV_INCLUDE_DIRS} include src/test)
+include_directories(${OpenCV_INCLUDE_DIRS})
+# include_directories(${OpenCV_INCLUDE_DIRS} include src/test)
 
 # add_executable(opencvtest src/main.cpp)
 

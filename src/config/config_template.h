@@ -3,9 +3,9 @@
 #include <string>
 
 // Paths to model
-const std::string YOLO_MODEL_PATH = "";
-const std::string CNN_MODEL_PATH = "";
+const std::string YOLO_MODEL_PATH = "models/yolov5s_detection.onnx";
+const std::string CNN_MODEL_PATH = "models/cnn_recognition.onnx";
 
-// Paths to test data
-const std::string IMAGE_PATH = "";
-const std::string VIDEO_PATH = "";
+// Tunable hyperparameters
+const float CONF_THRESHOLD = 0.40;
+const float NMS_THRESHOLD = 0.45;
