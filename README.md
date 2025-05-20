@@ -1,4 +1,4 @@
-# Traffic-Sign-Detection-and-Recognition-System
+# Traffic Sign Detection and Recognition System
 
 ## Overview
 
@@ -41,7 +41,7 @@ assistance systems, and traffic surveillance applications.
 3. CMake Setup
     * Open ```setup_env_example.cmake``` and update the **OpenCV_DIR path**.
     * Rename the file to ```setup_env.cmake```
-    * In your project root directory, run ```mingw32-make``` to make the build files
+    * In your project root directory, run ```cmake --build build``` to make the build files
 
 
 ## Usage
