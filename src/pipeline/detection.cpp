@@ -1,6 +1,6 @@
 // detection.cpp
 // Contains logic for loading YOLO model, running YOLO, processing the results and cropping the detections for CNN input
-#include "detection.h"
+#include "../include/TSDR/detection.h"
 #include "../config/config.h"
 #include <opencv2/opencv.hpp>
 
@@ -122,4 +122,3 @@ std::vector<cv::Mat> crop_detection_roi(const cv::Mat& frame, const std::vector<
     
     return cropped_rois;
 }
-

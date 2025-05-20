@@ -1,7 +1,7 @@
 // recognition.cpp
 // Contains lofic for loading and running CNN model and processing output to get CNN prediction
 
-#include "recognition.h"
+#include "../include/TSDR/recognition.h"
 #include <opencv2/opencv.hpp>
 
 cv::dnn::Net load_cnn_model(const std::string& model_path) {

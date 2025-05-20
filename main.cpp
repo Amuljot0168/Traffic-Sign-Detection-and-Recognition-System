@@ -1,5 +1,5 @@
 #include <opencv2/opencv.hpp>
-#include "pipeline/runner.h"
+#include "include/TSDR/runner.h"
 #include "config/config.h"
 
 int main(int argc, char** argv) {

@@ -1,12 +1,9 @@
-#include "runner.h"
+#include "../include/TSDR/runner.h"
 #include "../config/config.h"
-#include "detection.h"
-#include "recognition.h"
-#include "../utils/draw.h"
-#include "../utils/convert_cnn_labels.h"
-// #include "../metrics/yolo_metrics.h"
-// #include "../metrics/cnn_metrics.h"
-// #include "../metrics/metrics.h"
+#include "../include/TSDR/detection.h"
+#include "../include/TSDR/recognition.h"
+#include "../include/TSDR/draw.h"
+#include "../include/TSDR/convert_cnn_labels.h"
 #include <opencv2/opencv.hpp>
 
 void process_images(std::string image_path) {

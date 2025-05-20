@@ -1,4 +1,4 @@
-#include "convert_cnn_labels.h"
+#include "../include/TSDR/convert_cnn_labels.h"
 #include <opencv2/opencv.hpp>
 #include <unordered_map>
 

@@ -4,6 +4,7 @@
 CMakeCache.txt
 CMakeFiles/
 Makefile
+setup_env.cmake
 
 test_data/
 test/

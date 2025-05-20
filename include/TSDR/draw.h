@@ -1,6 +1,6 @@
 #ifndef DRAW_H
 #define DRAW_H
-#include "../pipeline/detection.h"
+#include "../include/TSDR/detection.h"
 #include <opencv2/opencv.hpp>
 
 void draw_detections(const cv::Mat& image, const std::vector<Detection>& detections, float CONF_THRESHOLD);
