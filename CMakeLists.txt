@@ -15,7 +15,7 @@ project(TSDR)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# OpenCV setup
+# ============== OpenCV setup =================== 
 if(EXISTS "${CMAKE_SOURCE_DIR}/setup_env.cmake")
     include(${CMAKE_SOURCE_DIR}/setup_env.cmake)
 endif()
@@ -38,7 +38,9 @@ add_executable(main
         # Pipeline
         src/pipeline/detection.cpp
         src/pipeline/recognition.cpp
-        src/pipeline/runner.cpp
+        src/pipeline/interface_engine.cpp
+        src/pipeline/image_handler.cpp
+        src/pipeline/video_handler.cpp
 
         # Utils
         src/utils/draw.cpp 
@@ -47,18 +49,46 @@ add_executable(main
 )
 target_link_libraries(main ${OpenCV_LIBS})
 
-# ============ YOLO Test Executable ==================
-add_executable(yolo_test test/yolo_test/yolo_test.cpp 
-        test/yolo_test/yolo_utils.h
-        test/yolo_test/yolo_utils.cpp
-        test/yolo_test/detection.h
-        test/yolo_test/detection.cpp
+# ============================ GoogleTest ==================================
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/release-1.12.1.zip
 )
-target_link_libraries(yolo_test ${OpenCV_LIBS})
+FetchContent_MakeAvailable(googletest)
 
-# ============= CNN Test Executable ==================
+enable_testing()
 
-add_executable(cnn_test 
-            test/cnn_test/cnn_test.cpp
+
+# ====================== Main Test Suite ==================
+add_executable(run_tests 
+        # tests/tests.cpp
+        tests/test_detection.cpp
+        tests/test_classification.cpp
+        tests/test_integration.cpp
+        ../src/pipeline/detection.cpp
+        ../src/pipeline/recognition.cpp
+
 )
-target_link_libraries(cnn_test ${OpenCV_LIBS})
+target_link_libraries(run_tests
+    gtest gtest_main
+    pthread
+    ${OpenCV_LIBS}
+)
+
+add_test(NAME AllTests COMMAND run_tests)
+
+# # ============ YOLO Test Executable ==================
+# add_executable(yolo_test test/yolo_test/yolo_test.cpp 
+#         test/yolo_test/yolo_utils.h
+#         test/yolo_test/yolo_utils.cpp
+#         test/yolo_test/detection.h
+#         test/yolo_test/detection.cpp
+# )
+# target_link_libraries(yolo_test ${OpenCV_LIBS})
+
+# # ============= CNN Test Executable ==================
+# add_executable(cnn_test 
+#         test/cnn_test/cnn_test.cpp
+# )
+# target_link_libraries(cnn_test ${OpenCV_LIBS})

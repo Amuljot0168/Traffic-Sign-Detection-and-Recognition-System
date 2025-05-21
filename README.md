@@ -72,4 +72,3 @@ This project is licensed under the MIT License. See the [License](./LICENSE) fil
 
 This project was completed as part of the pre-onboarding process for **KPIT-Technologies**.  
 Special thanks to the onboarding team for the opportunity to work on a practical, real-world problem.
-
