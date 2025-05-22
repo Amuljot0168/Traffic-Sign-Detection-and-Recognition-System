@@ -12,7 +12,6 @@ public:
 
 private: 
     InterfaceEngine interface_engine;
-    int skip_frames;
     int frame_count;
     float fps;
     std::chrono::steady_clock::time_point fps_timer_start;

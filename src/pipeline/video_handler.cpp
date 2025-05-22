@@ -3,7 +3,7 @@
 #include "../config/config.h"
 #include <opencv2/opencv.hpp>
 
-VideoProcessor::VideoProcessor() : interface_engine(), skip_frames(5), frame_count(0), fps(0.0f) {
+VideoProcessor::VideoProcessor() : interface_engine(), frame_count(0), fps(0.0f) {
     fps_timer_start = std::chrono::steady_clock::now();
 }
 
@@ -18,7 +18,7 @@ void VideoProcessor::process(const std::string& video_path) {
         while (cap.read(frame)) {
             frame_count++;
 
-            bool run_detection = (frame_count % skip_frames == 0);
+            bool run_detection = (frame_count % SKIP_FRAMES == 0);
             if (run_detection) {
                 last_predictions = interface_engine.engine(frame, last_detections);
             }
