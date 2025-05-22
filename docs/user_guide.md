@@ -116,6 +116,8 @@ Traffic-Sign-Detection-and-Recognition-System/
 │
 ├── 📁 src/                      # Main C++ source code files (e.g., detection.cpp, utils.cpp)
 │
+├── 📁 tests/                   # Unit tests or test cases
+│
 ├── .gitignore                  # Git ignore rules
 ├── CMakeLists.txt              # Main CMake build configuration
 ├── LICENSE                     # Project license
