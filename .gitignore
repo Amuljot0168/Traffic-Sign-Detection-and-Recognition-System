@@ -6,7 +6,7 @@ CMakeFiles/
 Makefile
 setup_env.cmake
 
-test_data/
+tests_data/
 test/
 src/config/config.h
 
