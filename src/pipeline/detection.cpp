@@ -11,21 +11,16 @@ Detector::Detector(const std::string& model_path, float conf_thresh, float nms_t
     if(yolo_net.empty()) {
         throw std::runtime_error("Failed to load YOLO model from " + model_path);
     }
-    // std::cout << "Model loaded successfully from: " << model_path << std::endl;
 }
 
 std::vector<Detection> Detector::detect(const cv::Mat& frame) {
     cv::Mat blob;
     cv::dnn::blobFromImage(frame, blob, 1.0/255.0, cv::Size(input_width, input_height), cv::Scalar(), true, false);
 
-    auto start = std::chrono::high_resolution_clock::now();
     yolo_net.setInput(blob);
     
     std::vector<cv::Mat> outputs;
     yolo_net.forward(outputs, yolo_net.getUnconnectedOutLayersNames());
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    // std::cout << "YOLO INFERENCE TIME: " << duration.count() << " MS" << std::endl;
 
     // Post processing logic
     const cv::Mat& output = outputs[0];
@@ -75,18 +70,22 @@ std::vector<Detection> Detector::detect(const cv::Mat& frame) {
         detections.push_back({ class_id, confidence, box });
     }
 
+    // Perform Non-Maximum Suppression (NMS) to remove overlapping boxes
     std::vector<int> indices;
     std::vector<cv::Rect> boxes;
     std::vector<float> scores;
 
+    // Extract bounding boxes and their confidence scores from detections
     for(const auto& d: detections) {
         boxes.push_back(d.box);
         scores.push_back(d.confidence);
     }
 
-    std::vector<Detection> final_detections;
+    // Apply NMS to filter out overlapping boxes based on confidence and NMS threshold
     cv::dnn::NMSBoxes(boxes, scores, conf_threshold, nms_threshold, indices);
 
+    // Collect final detections after NMS filtering
+    std::vector<Detection> final_detections;
     for(int idx : indices)
         final_detections.push_back(detections[idx]);
 
@@ -97,18 +96,25 @@ std::vector<cv::Mat> Detector::crop_rois(const cv::Mat& frame, const std::vector
     std::vector<cv::Mat> cropped_rois;
 
     for(auto& det : detections) {
+        // Ensure the detection box is within image bounds
         cv::Rect box = det.box & cv::Rect(0, 0, frame.cols, frame.rows);
         if (box.width <= 0 || box.height <= 0) continue;
 
+        // Crop the region of interest (ROI) from the frame
         cv::Mat roi = frame(box);
 
+        // Create a square canvas with size equal to max dimension of ROI
         int maxDim = std::max(roi.cols, roi.rows);
         cv::Mat square = cv::Mat::zeros(maxDim, maxDim, roi.type());
+
+        // Center the ROI on the square canvas
         roi.copyTo(square(cv::Rect((maxDim - roi.cols) / 2, (maxDim - roi.rows) / 2, roi.cols, roi.rows)));
 
+        // Resize the squared ROI to the target input size for the CNN
         cv::Mat resized;
         cv::resize(square, resized, target_crop_size);
 
+        // Add the processed ROI to the output vector
         cropped_rois.push_back(resized);
     }
 

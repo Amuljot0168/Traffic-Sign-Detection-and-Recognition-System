@@ -8,7 +8,7 @@ const std::string yolo_model_path = YOLO_MODEL_PATH;
 const std::string cnn_model_path = CNN_MODEL_PATH;
 
 // Tests end-to-end detection and recognition pipeline
-TEST(SystemTests, EndToEndDetectionAndRecognition) {
+TEST(SystemTests, end_to_end_detection_and_recognition) {
     Detector detector(yolo_model_path, 0.5f, 0.4f);
     Classifier classifier(cnn_model_path, 32);
     

@@ -14,7 +14,7 @@ protected:
 };
 
 // Tests that at least one valid detection is made on a known image
-TEST_F(DetectorTest, ValidDetection) {
+TEST_F(DetectorTest, valid_detection) {
     cv::Mat image = cv::imread("../tests/test_data/stop_sign.jpg");
     ASSERT_FALSE(image.empty());
 
@@ -28,14 +28,14 @@ TEST_F(DetectorTest, ValidDetection) {
 }
 
 // Tests that no detections are made on a blank image (edge case)
-TEST_F(DetectorTest, NoDetectionOnEmptyImage) {
+TEST_F(DetectorTest, no_detection_on_empty_image) {
     cv::Mat blank = cv::Mat::zeros(cv::Size(416, 416), CV_8UC3);
     auto detections = detector.detect(blank);
     EXPECT_EQ(detections.size(), 0);
 }
 
 // Tests that cropped ROIs match the number of detections and are resized correctly
-TEST_F(DetectorTest, ROICroppingMatchesDetection) {
+TEST_F(DetectorTest, roi_cropping_matches_detection) {
     cv::Mat image = cv::imread("../tests/test_data/stop_sign.jpg");
     ASSERT_FALSE(image.empty());
 

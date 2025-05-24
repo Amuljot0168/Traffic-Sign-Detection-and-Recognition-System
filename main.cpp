@@ -22,9 +22,10 @@ int main(int argc, char** argv) {
             VideoProcessor vp;
             vp.process(path);
         } 
-    }else {
-        std::cerr << "Usage: " << argv[0] << " --image <path_to_image> | --video <path_to_video>\n";
-        return 1;
+        else {
+            std::cerr << "Usage: " << argv[0] << " --image <path_to_image> | --video <path_to_video>\n";
+            return 1;
+        }
     }
 
     return 0;

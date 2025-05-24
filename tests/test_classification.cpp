@@ -15,7 +15,7 @@ protected:
 };
 
 // Tests if preprocessing resizes input to 32x32 as expected
-TEST_F(ClassifierTest, PreprocessingResizesToExpectedDimensions) {
+TEST_F(ClassifierTest, preprocessing_resizes_to_expected_dimensions) {
     // Classifier classifier(cnn_model_path, 32);
 
     cv::Mat image = cv::imread("../tests/test_data/stop_sign.jpg");
@@ -26,8 +26,8 @@ TEST_F(ClassifierTest, PreprocessingResizesToExpectedDimensions) {
     EXPECT_EQ(blob.size[3], 32);
 }
 
-// // Tests if prediction correctly classifies a known stop sign image
-TEST_F(ClassifierTest, PredictsKnownLabelCorrectly) {
+// Tests if prediction correctly classifies a known stop sign image
+TEST_F(ClassifierTest, predicts_known_label_correctly) {
     // Classifier classifier(cnn_model_path, 32);
 
     cv::Mat crop = cv::imread("../tests/test_data/stop_sign_crop.png");
@@ -38,7 +38,7 @@ TEST_F(ClassifierTest, PredictsKnownLabelCorrectly) {
 }
 
 // Tests if predict() handles empty input images gracefully
-TEST_F(ClassifierTest, HandlesEmptyInputGracefully) {
+TEST_F(ClassifierTest, handles_empty_input_gracefully) {
     // Classifier classifier(cnn_model_path, 32);
     
     cv::Mat empty;
