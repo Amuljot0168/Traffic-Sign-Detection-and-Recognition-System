@@ -1,12 +1,3 @@
-<!-- Why YOLOv5 (vs SSD, Faster R-CNN)
-
-Why CNN (vs using YOLOv5 for classification too)
-
-Why ONNX (interoperability between Python training and C++ deployment)
-
-Why OpenCV for C++ inference
-
- -->
  # Design Choices  
 This document outlines the key architectural and model selection decisions made during the development of the project. Each choice was driven by a balance between accuracy, speed, modularity, and future extensibility.  
 
