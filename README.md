@@ -55,7 +55,7 @@ Once the build files have been made successfully, open your command prompt and n
 
 ## Technical Documentation
 
-For a deeper understanding of the system architecture, model design choices, code structure, and implementation details, please refer to the [Technical Documentation](./docs/README.md) located in the `docs/` folder.
+For a deeper understanding of the system architecture, model design choices, code structure, and implementation details, please refer to the [Technical Documentation](./docs/) located in the `docs/` folder.
 
 
 ## Future Improvements
