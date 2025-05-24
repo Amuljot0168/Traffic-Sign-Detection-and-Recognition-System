@@ -1,14 +1,14 @@
-# 🚦 Traffic Sign Detection and Recognition System – User Guide
+# Traffic Sign Detection and Recognition System – User Guide
 
-## 📘 Introduction
+## Introduction
 
 This guide provides step-by-step instructions to set up, build, and run the **Traffic Sign Detection and Recognition System**, a computer vision application built with **C++ and OpenCV**. It detects and classifies Indian traffic signs using **YOLOv5** and a **CNN-based classifier**.
 
 ---
 
-## ⚙️ Installation
+## Installation
 
-### ✅ Step 1: Clone the Repository
+### Step 1: Clone the Repository
 
 Open a terminal (PowerShell, Git Bash, or CMD) and run:
 
@@ -19,7 +19,7 @@ cd Traffic-Sign-Detection-and-Recognition-System
 
 ---
 
-### ✅ Step 2: Install Prerequisites
+### Step 2: Install Prerequisites
 
 | Tool              | Description                                                                        |
 | ----------------- | ---------------------------------------------------------------------------------- |
@@ -28,18 +28,18 @@ cd Traffic-Sign-Detection-and-Recognition-System
 | Git               | Version control system – install from [git-scm.com](https://git-scm.com)           |
 | Python (optional) | Python 3.x with pip – only needed for exporting YOLOv5 to ONNX                     |
 
-⚠️ After installing, make sure to **add MinGW and CMake’s `bin/` folders to your system PATH**.
+After installing, make sure to **add MinGW and CMake’s `bin/` folders to your system PATH**.
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
-### ✅ Step 3: OpenCV Setup
+### Step 3: OpenCV Setup
 
 - Download the [OpenCV-MinGW-Build-OpenCV-4.5.5-x64](https://github.com/Amul24/OpenCV-download-File.git) version as a zip and extract it to your desired location.
 - Add the OpenCV-MinGW-Build bin path to your System Environment Varible.
   
-### ✅ Step 4: CMake Setup
+### Step 4: CMake Setup
 
 - Open `setup_env_example.cmake` and update the OpenCV_DIR path.
 - Rename the file to `setup_env.cmake`
@@ -55,7 +55,7 @@ Change the path if your OpenCV folder is elsewhere.
 
 ---
 
-### ✅ Step 5: Configure with CMake
+### Step 5: Configure with CMake
 
 ```bash
 cmake -G "MinGW Makefiles" -S . -B build/
@@ -65,7 +65,7 @@ This generates build files using the source in the current directory and stores 
 
 ---
 
-### ✅ Step 6: Build the Project
+### Step 6: Build the Project
 
 ```bash
 cmake --build build/ --config Release
@@ -75,16 +75,16 @@ This produces the `main.exe` executable in the `build/` directory.
 
 ---
 
-## 🚀 Running the Project
+## Running the Project
 
-### 🖼️ Run with Image
+### Run with Image
 
 ```bash
 cd build
 main.exe --image path/to/image.jpg
 ```
 
-### 🎥 Run with Video
+### Run with Video
 
 ```bash
 main.exe --video path/to/video.mp4
@@ -95,28 +95,28 @@ Replace the paths with your actual image/video files.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```bash
 Traffic-Sign-Detection-and-Recognition-System/
 │
-├── 📁 assets/demo/               # Demo images, videos, or media for documentation
+├── assets/demo/               # Demo images, videos, or media for documentation
 │
-├── 📁 config/                    # Configuration files (e.g., config.h)
+├── config/                    # Configuration files (e.g., config.h)
 │
-├── 📁 data/                      # Input test data (e.g., images and videos)
+├── data/                      # Input test data (e.g., images and videos)
 │
-├── 📁 docs/                      # Documentation files (e.g., tech_specs.md, user_guide.md)
+├── docs/                      # Documentation files (e.g., tech_specs.md, user_guide.md)
 │
-├── 📁 include/TSDR/             # Header files for the project
+├── include/TSDR/             # Header files for the project
 │
-├── 📁 models/                   # YOLOv5n ONNX model and class labels (e.g., coco.names)
+├── models/                   # YOLOv5n ONNX model and class labels (e.g., coco.names)
 │
-├── 📁 python_scripts/           # Python utilities (e.g., for model export or preprocessing)
+├── python_scripts/           # Python utilities (e.g., for model export or preprocessing)
 │
-├── 📁 src/                      # Main C++ source code files (e.g., detection.cpp, utils.cpp)
+├── src/                      # Main C++ source code files (e.g., detection.cpp, utils.cpp)
 │
-├── 📁 tests/                   # Unit tests or test cases
+├── tests/                   # Unit tests or test cases
 │
 ├── .gitignore                  # Git ignore rules
 ├── CMakeLists.txt              # Main CMake build configuration
@@ -129,14 +129,14 @@ Traffic-Sign-Detection-and-Recognition-System/
 
 ---
 
-## ✅ Features
+## Features
 
-✔️ **Current:**
+**Current:**
 
 - Detects and classifies traffic signs in images/videos
 - Uses YOLOv5 and CNN (exported to ONNX and XML)
 
-🔜 **Coming Soon:**
+**Coming Soon:**
 
 - Live webcam support
 - Alert system and GUI interface
@@ -144,7 +144,7 @@ Traffic-Sign-Detection-and-Recognition-System/
 
 ---
 
-## ❗ Troubleshooting
+## Troubleshooting
 
 | Issue                            | Fix                                               |
 | -------------------------------- | ------------------------------------------------- |

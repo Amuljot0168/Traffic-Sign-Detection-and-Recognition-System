@@ -1,10 +1,10 @@
-# 🚦Traffic Sign Detection and Recognition - Model Training
+# Traffic Sign Detection and Recognition - Model Training
 
 This document provides the **complete training setup** for both the **YOLOv5 object detection model** and a **CNN-based image classification model** 
 
 ---
 
-## 📁 Dataset
+## Dataset
 
 ### YOLOv5 Dataset
 - **Location**: `/kaggle/input/traffic-signs-dataset-in-yolo-format/`

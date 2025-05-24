@@ -1,14 +1,14 @@
-# 🏗️ Architecture – Traffic Sign Detection and Recognition System
+# Architecture – Traffic Sign Detection and Recognition System
 
 This document provides a comprehensive explanation of the architecture and components that power the **Traffic Sign Detection and Recognition System**, a real-time application for identifying Indian traffic signs using deep learning models integrated into a C++ pipeline.
 
 ---
 
-## 🔄 System Pipeline Overview
+## System Pipeline Overview
 
 The application follows a sequential yet modular processing pipeline:
 
-## 📊 Block Diagram
+## Block Diagram
 
 ```
 ┌───────────────────────┐
@@ -71,7 +71,7 @@ Each stage of the pipeline performs a well-defined task and communicates with th
 
 ---
 
-## 🧩 Component Breakdown & Responsibilities
+## Component Breakdown & Responsibilities
 
 ### 1. **Input (Image or Video)**
 
@@ -121,7 +121,7 @@ Each stage of the pipeline performs a well-defined task and communicates with th
 
 ---
 
-## 🔁 Cross-language Data Flow: Python → C++
+## Cross-language Data Flow: Python → C++
 
 | Stage                  | Language | Action/Details                                                     |
 | ---------------------- | -------- | ------------------------------------------------------------------ |
@@ -135,7 +135,7 @@ Each stage of the pipeline performs a well-defined task and communicates with th
 
 ---
 
-## ⚙️ Inference Workflow (C++ Runtime)
+## Inference Workflow (C++ Runtime)
 
 1. Load YOLOv5 model (`yolov5n.onnx`)
 2. Load CNN classifier (`traffic_cnn_model.xml`)
@@ -149,7 +149,7 @@ This workflow ensures real-time performance and efficient memory handling using 
 
 ---
 
-## 🧱 Summary Table
+## Summary Table
 
 | Component      | Role                               | Technology Used                     |
 | -------------- | ---------------------------------- | ----------------------------------- |
@@ -161,7 +161,7 @@ This workflow ensures real-time performance and efficient memory handling using 
 
 ---
 
-## 🚀 Advantages of This Architecture
+## Advantages of This Architecture
 
 - **Modularity**: Easy to replace models without touching C++ code.
 - **Cross-platform**: C++ backend runs on Windows/Linux; models are platform-agnostic.
